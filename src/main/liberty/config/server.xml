@@ -1,0 +1,21 @@
+<server description="Sample Servlet server">
+    <featureManager>
+        <feature>javaee-8.0</feature>
+    </featureManager>
+    <basicRegistry id="basic" realm="dummyRealm"/>
+
+    <variable name="http.port" defaultValue="9080"/>
+    <variable name="https.port" defaultValue="9443"/>
+    <variable name="app.context.root" defaultValue="ServletSample"/>
+
+    <jndiEntry jndiName="queue"
+               value="consumerQueue" />
+    <jndiEntry jndiName="connectionFactory"
+               value="host=localhost;port=61616" />
+    <jndiEntry jndiName="secureConnectionFactory"
+               value="host=localhost;port=61717;useTopologyForLoadBalancing=false;useEpoll=false;sslEnabled=true;verifyHost=false;keyStorePath={{ADD-FULL-PATH}}/liberty-mutual-tls-amq-core/ssl/client/client.ks;keyStorePassword=123456;trustStorePath={{ADD-FULL-PATH}}/liberty-mutual-tls-amq-core/ssl/client/client.ts;trustStorePassword=123456"/>
+
+    <httpEndpoint httpPort="${http.port}" 
+    httpsPort="${https.port}" id="defaultHttpEndpoint"  host="*" />
+    <webApplication id="ServletSample" location="ServletSample.war" contextRoot="${app.context.root}" />
+</server>
