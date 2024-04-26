@@ -1,6 +1,13 @@
 # README
 This projects runs webserver that connects against an AMQ Broker using CORE protocol.
 
+## Create ssl folder on this project
+```
+$ mkdir -p -- ssl/client ssl/server
+```
+
+## Change {{ADD-FULL-PATH}} variable at src/main/liberty/config/server.xml
+
 ## Broker Configuration
 Add the following acceptor to your broker.xml
 ```
