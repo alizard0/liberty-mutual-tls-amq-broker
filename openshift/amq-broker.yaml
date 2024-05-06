@@ -1,0 +1,25 @@
+apiVersion: broker.amq.io/v1beta1
+kind: ActiveMQArtemis
+metadata:
+  name: ex-aao
+  namespace: amq-broker
+spec:
+  acceptors:
+    - connectionsAllowed: 5
+      expose: true
+      name: my-acceptor
+      port: 61717
+      protocols: core
+      sslEnabled: true
+      sslSecret: my-tls-secret
+  console:
+    expose: true
+  deploymentPlan:
+    image: placeholder
+    jolokiaAgentEnabled: false
+    journalType: nio
+    managementRBACEnabled: true
+    messageMigration: false
+    persistenceEnabled: false
+    requireLogin: false
+    size: 1
