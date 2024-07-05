@@ -69,6 +69,7 @@ $ keytool -import -file server.crt -alias myCA -keystore ../client/client.ts
 
 10. Deploy the broker on Openshift and create the secret with the keystore and trustore
 ```
+$ oc apply -f openshift/amq-broker.yaml
 $ oc create secret generic my-tls-secret \
 --from-file=broker.ks=~/broker.ks \
 --from-file=client.ts=~/broker.ts \
