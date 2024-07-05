@@ -67,6 +67,15 @@ $ keytool -importkeystore -srckeystore clientStore.p12 -destkeystore client.ks -
 $ keytool -import -file server.crt -alias myCA -keystore ../client/client.ts
 ```
 
+10. Deploy the broker on Openshift and create the secret with the keystore and trustore
+```
+$ oc create secret generic my-tls-secret \
+--from-file=broker.ks=~/broker.ks \
+--from-file=client.ts=~/broker.ts \
+--from-literal=keyStorePassword=<password> \
+--from-literal=trustStorePassword=<password>
+```
+
 ## Run the project
 ```
 $ mvn liberty:run
