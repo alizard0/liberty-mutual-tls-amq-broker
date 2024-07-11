@@ -77,10 +77,36 @@ $ oc create secret generic my-tls-secret \
 --from-literal=trustStorePassword=<password>
 ```
 
+## For compiling AMD64
+1. Make sure you are using the right image on the dockerfile
+```
+FROM icr.io/appcafe/open-liberty:full-java21-openj9-ubi-minimal
+```
+2. Remove the scripts execution on the dockerfile
+```
+# RUN features.sh
+# RUN configure.sh
+```
+3. Run podman build with the right platform
+```
+$ podman build -f Dockerfile --platform linux/amd64 -t liberty-amq-broker:1.0.0-SNAPSHOT . 
+```
+
+## Use the public container image for AMD64 archs
+1. Download the image from [quay.io/devlizardo/liberty-amq-broker:1.0.0-SNAPSHOT](quay.io/devlizardo/liberty-amq-broker:1.0.0-SNAPSHOT)
+
+## Deploy the application on Openshift
+```
+$ oc apply openshift/liberty-app.yaml
+$ curl http://${APP_OPENSHIFT_HOST}/LibertyMutualTlsForAMQBroker/
+```
+
+### Open on your browser: [http://${APP_OPENSHIFT_HOST}/LibertyMutualTlsForAMQBroker/](http://liberty-amq-broker-amq-broker.apps.cluster-cpbwl.cpbwl.sandbox1535.opentlc.com/LibertyMutualTlsForAMQBroker/)
+
 ## Run the project
 ```
 $ mvn liberty:run
 ```
 
-## Access the endpoint
+### Access the endpoint
 http://192.168.1.69:9080/LibertyMutualTlsForAMQBroker/

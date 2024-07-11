@@ -10,12 +10,18 @@
 
     <jndiEntry jndiName="queue"
                value="consumerQueue" />
+    <!--
     <jndiEntry jndiName="connectionFactory"
-               value="host=localhost;port=61616" />
+               value="host=localhost;port=61717" />
+    -->
+    <!-- Run localhost
     <jndiEntry jndiName="secureConnectionFactory"
-               value="host=localhost;port=61717;useTopologyForLoadBalancing=false;useEpoll=false;sslEnabled=true;verifyHost=false;keyStorePath={{ADD-FULL-PATH}}/liberty-mutual-tls-amq-core/ssl/client/client.ks;keyStorePassword=123456;trustStorePath={{ADD-FULL-PATH}}/liberty-mutual-tls-amq-core/ssl/client/client.ts;trustStorePassword=123456"/>
+               value="host=ex-aao-my-acceptor-0-svc-rte-amq-broker.apps.cluster-cpbwl.cpbwl.sandbox1535.opentlc.com;port=443;useTopologyForLoadBalancing=false;useEpoll=false;sslEnabled=true;verifyHost=true;keyStorePath=/Users/alizardo/Documents/Cajamar/liberty-mutual-tls-amq-core/verify-host-ssl/client/client.ks;keyStorePassword=123456;trustStorePath=/Users/alizardo/Documents/Cajamar/liberty-mutual-tls-amq-core/verify-host-ssl/client/client.ts;trustStorePassword=123456"/>
+    -->
+    <jndiEntry jndiName="secureConnectionFactory"
+               value="host=ex-aao-my-acceptor-0-svc-rte-amq-broker.apps.cluster-cpbwl.cpbwl.sandbox1535.opentlc.com;port=443;useTopologyForLoadBalancing=false;useEpoll=false;sslEnabled=true;verifyHost=true;keyStorePath=${server.output.dir}/client.ks;keyStorePassword=123456;trustStorePath=${server.output.dir}/client.ts;trustStorePassword=123456"/>
 
-    <httpEndpoint httpPort="${http.port}" 
+    <httpEndpoint httpPort="${http.port}"
     httpsPort="${https.port}" id="defaultHttpEndpoint"  host="*" />
     <webApplication id="ServletSample" location="ServletSample.war" contextRoot="${app.context.root}" />
 </server>

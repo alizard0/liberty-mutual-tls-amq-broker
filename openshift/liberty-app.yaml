@@ -1,0 +1,28 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: liberty-amq-broker
+  namespace: amq-broker
+  deployment: liberty-amq-broker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: liberty-amq-broker
+      deployment: liberty-amq-broker
+  template:
+    metadata:
+      labels:
+        app: liberty-amq-broker
+        deployment: liberty-amq-broker
+    spec:
+      containers:
+        - name: liberty-amq-broker
+          image: >-
+            quay.io/devlizardo/liberty-amq-broker:1.0.0-SNAPSHOT
+          ports:
+            - containerPort: 9080
+              protocol: TCP
+            - containerPort: 9443
+              protocol: TCP
+          imagePullPolicy: Always
